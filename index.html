@@ -19,6 +19,7 @@
       --tab-shadow: rgba(0,0,0,0.15);
       --text-color: #1a1a1a;
       --border-color: #ccc;
+      --accent-color: #666;
     }
 
     body {
@@ -234,6 +235,35 @@
       margin-top: 15px;
     }
 
+    /* Visitor Counter */
+    .visitor-counter {
+      text-align: center;
+      padding: 15px 0 10px;
+      margin-top: 20px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .visitor-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .visitor-count .number {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent-color, #888);
+    }
+
+    .visitor-count .label {
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
     /* Responsive */
     @media (max-width: 600px) {
       .file-content {
@@ -276,6 +306,14 @@
     </div>
 
     <div class="entry-counter" id="entryCounter"></div>
+
+    <!-- Visitor Counter -->
+    <div class="visitor-counter">
+      <div class="visitor-count">
+        <span class="number" id="visitorCount">0</span>
+        <span class="label">BROS VISITED THIS PAGE</span>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -441,6 +479,49 @@ Stay ready.
       if (e.key === 'ArrowLeft') navigate(-1);
       if (e.key === 'ArrowRight') navigate(1);
     });
+
+    // ============================================
+    // VISITOR COUNTER
+    // ============================================
+    
+    // Base count (simulates existing visitors)
+    const BASE_COUNT = 47;
+    
+    // Check if this visitor has been counted
+    const visitorKey = 'brotobro_visited';
+    let totalCount = parseInt(localStorage.getItem('brotobro_count') || BASE_COUNT);
+    
+    if (!localStorage.getItem(visitorKey)) {
+      // New visitor - increment count
+      totalCount++;
+      localStorage.setItem('brotobro_count', totalCount.toString());
+      localStorage.setItem(visitorKey, 'true');
+    }
+    
+    // Display count with animation
+    const countEl = document.getElementById('visitorCount');
+    let displayCount = 0;
+    const targetCount = totalCount;
+    const duration = 1500; // 1.5 seconds
+    const startTime = Date.now();
+    
+    function animateCount() {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function
+      const eased = 1 - Math.pow(1 - progress, 3);
+      displayCount = Math.floor(eased * targetCount);
+      
+      countEl.textContent = displayCount.toLocaleString();
+      
+      if (progress < 1) {
+        requestAnimationFrame(animateCount);
+      }
+    }
+    
+    // Start animation when page loads
+    setTimeout(animateCount, 500);
   </script>
 </body>
 </html>
