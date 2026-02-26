@@ -280,62 +280,17 @@
 
   <script>
     // ENTRIES - Add new ones here
-    const entries = [
-      {
-        title: "Entry 001",
-        date: "2026-02-25",
-        color: 1,
-        content: `Yo.
-
-This the first one. Just getting started.
-
-The idea here is simple — raw thoughts, bro to bro. No polish, no performance. Just real talk.
-
-Sometimes you need to get things out of your head and onto paper. Or screen. Whatever.
-
-This is that.
-
-Let's see where it goes.
-
-— G`
-      },
-      {
-        title: "Entry 002",
-        date: "2026-02-26",
-        color: 2,
-        content: `Been thinking about momentum.
-
-The hardest part isn't the work — it's starting. Once you're moving, everything gets easier.
-
-But that initial push? That's where most people stop.
-
-The trick is to make starting so small it's impossible to fail. One sentence. One line of code. One step.
-
-Then let momentum do the rest.
-
-— G`
-      },
-      {
-        title: "Entry 003",
-        date: "2026-02-27",
-        color: 3,
-        content: `Your network is your net worth.
-
-Cliche? Yeah. True? Also yeah.
-
-But here's the thing nobody says — your network isn't the people you know. It's the people who would actually show up for you.
-
-Quality over quantity. Always.
-
-— G`
-      }
-    ];
+    const entries = [];
 
     let currentIndex = 0;
 
     // Generate tabs
     function renderTabs() {
       const tabBar = document.getElementById('tabBar');
+      if (entries.length === 0) {
+        tabBar.innerHTML = '<div class="tab tab-1 active">Entry 001</div>';
+        return;
+      }
       tabBar.innerHTML = entries.map((entry, index) => 
         `<div class="tab tab-${entry.color} ${index === currentIndex ? 'active' : ''}" 
              onclick="showEntry(${index})">${entry.title}</div>`
@@ -345,6 +300,22 @@ Quality over quantity. Always.
     // Generate content areas
     function renderContent() {
       const contentArea = document.getElementById('contentArea');
+      if (entries.length === 0) {
+        contentArea.innerHTML = `
+          <div class="file-content active">
+            <div class="file-header">
+              <div class="file-icon">.txt</div>
+              <div class="file-name">entry_001.txt</div>
+              <div class="file-date">awaiting...</div>
+            </div>
+            <div class="file-body">First entry coming soon.
+
+Stay ready.
+
+— G</div>
+          </div>`;
+        return;
+      }
       contentArea.innerHTML = entries.map((entry, index) => 
         `<div class="file-content ${index === currentIndex ? 'active' : ''}" id="entry-${index}">
           <div class="file-header">
@@ -374,6 +345,14 @@ Quality over quantity. Always.
 
     // Update all visual elements
     function updateView() {
+      // Handle empty state
+      if (entries.length === 0) {
+        document.getElementById('prevBtn').disabled = true;
+        document.getElementById('nextBtn').disabled = true;
+        document.getElementById('entryCounter').textContent = 'Entry 1 of 1 (awaiting)';
+        return;
+      }
+
       // Update tabs
       document.querySelectorAll('.tab').forEach((tab, index) => {
         tab.classList.toggle('active', index === currentIndex);
