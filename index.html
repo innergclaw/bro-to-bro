@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRO TO BRO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --folder-bg: #f5f0e6;
+      --tab-shadow: rgba(0,0,0,0.15);
+      --text-color: #1a1a1a;
+      --border-color: #ccc;
+    }
+
+    body {
+      font-family: 'IBM Plex Mono', monospace;
+      background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #888;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Tab Bar */
+    .tab-bar {
+      display: flex;
+      align-items: flex-end;
+      padding: 0 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 4px;
+    }
+
+    .tab-bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab {
+      padding: 12px 20px 8px;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      position: relative;
+      min-width: 80px;
+      text-align: center;
+      box-shadow: 0 -2px 8px var(--tab-shadow);
+    }
+
+    .tab:hover {
+      transform: translateY(-2px);
+    }
+
+    .tab.active {
+      transform: translateY(0);
+      z-index: 10;
+    }
+
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--folder-bg);
+    }
+
+    /* Tab Colors */
+    .tab-1 { background: #ffd93d; color: #1a1a1a; }
+    .tab-2 { background: #6bcb77; color: #1a1a1a; }
+    .tab-3 { background: #4d96ff; color: #fff; }
+    .tab-4 { background: #ff6b6b; color: #fff; }
+    .tab-5 { background: #9b59b6; color: #fff; }
+    .tab-6 { background: #ff9f43; color: #1a1a1a; }
+    .tab-7 { background: #00cec9; color: #1a1a1a; }
+    .tab-8 { background: #fd79a8; color: #1a1a1a; }
+
+    /* Folder */
+    .folder {
+      background: var(--folder-bg);
+      border-radius: 0 8px 8px 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .folder::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, 
+        #ffd93d 0%, #ffd93d 12.5%,
+        #6bcb77 12.5%, #6bcb77 25%,
+        #4d96ff 25%, #4d96ff 37.5%,
+        #ff6b6b 37.5%, #ff6b6b 50%,
+        #9b59b6 50%, #9b59b6 62.5%,
+        #ff9f43 62.5%, #ff9f43 75%,
+        #00cec9 75%, #00cec9 87.5%,
+        #fd79a8 87.5%, #fd79a8 100%
+      );
+      opacity: 0.6;
+    }
+
+    /* File Content */
+    .file-content {
+      padding: 40px;
+      min-height: 400px;
+      display: none;
+    }
+
+    .file-content.active {
+      display: block;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .file-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    .file-icon {
+      width: 24px;
+      height: 24px;
+      background: #ddd;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #666;
+    }
+
+    .file-name {
+      font-size: 14px;
+      color: var(--text-color);
+      font-weight: 600;
+    }
+
+    .file-date {
+      margin-left: auto;
+      font-size: 11px;
+      color: #888;
+    }
+
+    .file-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-color);
+      white-space: pre-wrap;
+    }
+
+    /* Navigation Arrows */
+    .nav-arrows {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .nav-arrow {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #888;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-arrow:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    .nav-arrow:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* Entry Counter */
+    .entry-counter {
+      text-align: center;
+      color: #666;
+      font-size: 11px;
+      margin-top: 15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .file-content {
+        padding: 25px;
+        min-height: 300px;
+      }
+      
+      .file-body {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+      
+      .tab {
+        padding: 10px 16px 6px;
+        font-size: 12px;
+        min-width: 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      BRO TO BRO
+    </div>
+
+    <div class="tab-bar" id="tabBar">
+      <!-- Tabs generated by JS -->
+    </div>
+
+    <div class="folder">
+      <div id="contentArea">
+        <!-- Content generated by JS -->
+      </div>
+    </div>
+
+    <div class="nav-arrows">
+      <button class="nav-arrow" id="prevBtn" onclick="navigate(-1)">← PREV</button>
+      <button class="nav-arrow" id="nextBtn" onclick="navigate(1)">NEXT →</button>
+    </div>
+
+    <div class="entry-counter" id="entryCounter"></div>
+  </div>
+
+  <script>
+    // ENTRIES - Add new ones here
+    const entries = [
+      {
+        title: "Entry 001",
+        date: "2026-02-25",
+        color: 1,
+        content: `Yo.
+
+This the first one. Just getting started.
+
+The idea here is simple — raw thoughts, bro to bro. No polish, no performance. Just real talk.
+
+Sometimes you need to get things out of your head and onto paper. Or screen. Whatever.
+
+This is that.
+
+Let's see where it goes.
+
+— G`
+      },
+      {
+        title: "Entry 002",
+        date: "2026-02-26",
+        color: 2,
+        content: `Been thinking about momentum.
+
+The hardest part isn't the work — it's starting. Once you're moving, everything gets easier.
+
+But that initial push? That's where most people stop.
+
+The trick is to make starting so small it's impossible to fail. One sentence. One line of code. One step.
+
+Then let momentum do the rest.
+
+— G`
+      },
+      {
+        title: "Entry 003",
+        date: "2026-02-27",
+        color: 3,
+        content: `Your network is your net worth.
+
+Cliche? Yeah. True? Also yeah.
+
+But here's the thing nobody says — your network isn't the people you know. It's the people who would actually show up for you.
+
+Quality over quantity. Always.
+
+— G`
+      }
+    ];
+
+    let currentIndex = 0;
+
+    // Generate tabs
+    function renderTabs() {
+      const tabBar = document.getElementById('tabBar');
+      tabBar.innerHTML = entries.map((entry, index) => 
+        `<div class="tab tab-${entry.color} ${index === currentIndex ? 'active' : ''}" 
+             onclick="showEntry(${index})">${entry.title}</div>`
+      ).join('');
+    }
+
+    // Generate content areas
+    function renderContent() {
+      const contentArea = document.getElementById('contentArea');
+      contentArea.innerHTML = entries.map((entry, index) => 
+        `<div class="file-content ${index === currentIndex ? 'active' : ''}" id="entry-${index}">
+          <div class="file-header">
+            <div class="file-icon">.txt</div>
+            <div class="file-name">${entry.title.toLowerCase()}.txt</div>
+            <div class="file-date">${entry.date}</div>
+          </div>
+          <div class="file-body">${entry.content}</div>
+        </div>`
+      ).join('');
+    }
+
+    // Show specific entry
+    function showEntry(index) {
+      currentIndex = index;
+      updateView();
+    }
+
+    // Navigate prev/next
+    function navigate(direction) {
+      const newIndex = currentIndex + direction;
+      if (newIndex >= 0 && newIndex < entries.length) {
+        currentIndex = newIndex;
+        updateView();
+      }
+    }
+
+    // Update all visual elements
+    function updateView() {
+      // Update tabs
+      document.querySelectorAll('.tab').forEach((tab, index) => {
+        tab.classList.toggle('active', index === currentIndex);
+      });
+
+      // Update content
+      document.querySelectorAll('.file-content').forEach((content, index) => {
+        content.classList.toggle('active', index === currentIndex);
+      });
+
+      // Update nav buttons
+      document.getElementById('prevBtn').disabled = currentIndex === 0;
+      document.getElementById('nextBtn').disabled = currentIndex === entries.length - 1;
+
+      // Update counter
+      document.getElementById('entryCounter').textContent = 
+        `Entry ${currentIndex + 1} of ${entries.length}`;
+
+      // Scroll active tab into view
+      const activeTab = document.querySelectorAll('.tab')[currentIndex];
+      if (activeTab) {
+        activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    // Initialize
+    renderTabs();
+    renderContent();
+    updateView();
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+  </script>
+</body>
+</html>
