@@ -1,87 +1,88 @@
 # BRO TO BRO
 
-> Raw thoughts. Real experience. No fluff.
+> raw thoughts. real experience. no filler.
 
 ---
 
-## What This Is
+## what this is
 
-A digital journal of raw thoughts, lessons, and experiences — written bro to bro.
+a digital journal of real moments, real lessons, real experiences — written bro to bro.
 
-No polish. No performance. Just real talk from 29+ years of living, learning, and figuring things out.
-
----
-
-## The Mission
-
-**Help the BROS get into reading.**
-
-Most people don't read anymore. They doomscroll. They consume content that adds nothing.
-
-This is the opposite.
-
-Short, punchy, real. Entries you can read in 2 minutes that actually make you think.
+no polish. no performance. just perspective from 29+ years of living, building, fumbling, winning, and learning.
 
 ---
 
-## The Format
+## the mission
 
-- **Raw text files** — like opening a notepad
-- **No formatting fluff** — just words
-- **Easy to consume** — one entry at a time
-- **Real experience** — not theory, not advice columns
+**get the bros back into reading.**
 
----
+most people don't read anymore. they scroll. they react. they consume noise that builds nothing.
 
-## Topics
+this is the opposite.
 
-Whatever's relevant:
-- Life lessons
-- Business moves
-- Mental game
-- Relationships
-- Growth
-- Mistakes made
-- Wins earned
+short. sharp. honest. entries you can read in two minutes that actually shift how you think.
 
 ---
 
-## For The Bros Who...
+## the format
 
-- Don't read books but need the game
-- Want real talk, not motivational fluff
-- Are building something
-- Are figuring it out
-- Want to level up
-
----
-
-## How to Read
-
-Browse the tabs. Click one. Read it.
-
-That's it.
-
-No algorithm. No feed. No infinite scroll.
-
-Just one entry at a time.
+- **raw text files** — like opening a notepad
+- **no design distractions** — just words
+- **one entry at a time** — no feed, no scroll
+- **real experience** — not theory, not recycled motivation
 
 ---
 
-## Who's Writing
+## topics
 
-**G** — 29+ years of experience. Still learning. Sharing what works.
+whatever's real right now:
+
+- life lessons
+- business moves
+- mental discipline
+- relationships
+- growth
+- mistakes made
+- wins earned
 
 ---
 
-## Tech
+## for the bros who...
 
-- Static HTML/CSS/JS
-- Hosted on GitHub Pages
-- No tracking, no cookies, no BS
+- don't read books but still need the game
+- want clarity, not hype
+- are building something from scratch
+- are figuring life out in real time
+- refuse to stay average
 
 ---
 
-**Evolution favors action.**
+## how to read
 
-*— G*
+open a tab. click one. read it.
+
+that's it.
+
+no algorithm. no feed. no endless scroll.
+
+just one thought at a time.
+
+---
+
+## who's writing
+
+**g** — 29+ years deep. still evolving. sharing what's tested, not just talked about.
+
+---
+
+## tech
+
+- static html, css, js
+- hosted on github pages
+- no tracking. no cookies. no weird data grabs.
+
+---
+
+**evolution favors action.**
+
+*— g*
