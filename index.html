@@ -344,6 +344,94 @@
       font-family: 'Caveat', cursive;
     }
 
+    /* Clickable Entries */
+    .entry {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .entry-full {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .entry-full.active {
+      display: flex;
+    }
+
+    .entry-full-content {
+      background: var(--paper-color);
+      max-width: 600px;
+      width: 100%;
+      padding: 40px;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .entry-full-content::before {
+      content: '';
+      position: absolute;
+      top: 60px;
+      left: 50px;
+      right: 30px;
+      bottom: 30px;
+      background: repeating-linear-gradient(
+        transparent 0px,
+        transparent 31px,
+        var(--paper-lines) 31px,
+        var(--paper-lines) 32px
+      );
+      pointer-events: none;
+    }
+
+    .entry-full-date {
+      font-size: 16px;
+      color: var(--pencil-gray);
+      margin-bottom: 20px;
+      font-family: 'Caveat', cursive;
+    }
+
+    .entry-full-text {
+      font-size: 26px;
+      line-height: 1.8;
+      color: var(--ink-color);
+      font-family: 'Caveat', cursive;
+      position: relative;
+      z-index: 1;
+    }
+
+    .entry-full-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      color: var(--pencil-gray);
+      cursor: pointer;
+      font-family: sans-serif;
+      line-height: 1;
+    }
+
+    .entry-full-close:hover {
+      color: var(--ink-color);
+    }
+
+    .click-hint {
+      font-size: 12px;
+      color: var(--pencil-gray);
+      margin-top: 10px;
+      font-style: italic;
+    }
+
     /* Mobile */
     @media (max-width: 768px) {
       .content {
@@ -415,24 +503,27 @@
 
         <!-- Content -->
         <div class="content">
-          <div class="entry">
+          <div class="entry" onclick="openEntry()">
             <div class="entry-date">February 26, 2026</div>
             <div class="entry-text">
               <span class="highlight">Prosperity ain't about money.</span> It's about options. The freedom to say no. The space to think. The ability to walk away from things that don't serve you.
             </div>
+            <div class="click-hint">Click to read full note →</div>
           </div>
+        </div>
 
-          <div class="entry">
-            <div class="entry-date">February 25, 2026</div>
-            <div class="entry-text">
-              Most people don't want solutions. They want validation. Watch who gets uncomfortable when you start winning.
-            </div>
-          </div>
-
-          <div class="entry">
-            <div class="entry-date">February 24, 2026</div>
-            <div class="entry-text">
-              The best investment you'll ever make isn't a stock. It's building a <span class="highlight">skill stack</span> that nobody can take from you.
+        <!-- Full Entry Modal -->
+        <div class="entry-full" id="entryModal" onclick="closeEntry(event)">
+          <div class="entry-full-content" onclick="event.stopPropagation()">
+            <span class="entry-full-close" onclick="closeEntry()">&times;</span>
+            <div class="entry-full-date">February 26, 2026</div>
+            <div class="entry-full-text">
+              Prosperity ain't about money.<br><br>
+              It's about options.<br><br>
+              The freedom to say no.<br><br>
+              The space to think.<br><br>
+              The ability to walk away from things that don't serve you.<br><br>
+              <span class="highlight">That's real wealth.</span>
             </div>
           </div>
         </div>
@@ -447,5 +538,26 @@
       29+ years of experience shared bro to bro
     </div>
   </div>
+
+  <script>
+    function openEntry() {
+      document.getElementById('entryModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEntry(event) {
+      if (!event || event.target === document.getElementById('entryModal')) {
+        document.getElementById('entryModal').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeEntry();
+      }
+    });
+  </script>
 </body>
 </html>
