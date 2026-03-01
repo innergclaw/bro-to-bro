@@ -17,146 +17,105 @@
     :root {
       --paper-color: #fef9e7;
       --paper-lines: #e8e0c8;
-      --leather-dark: #5c4033;
-      --leather-light: #8b6914;
-      --leather-medium: #6b4423;
-      --wood-grain: #d4a574;
+      --leather-dark: #1a0f05;
+      --leather-medium: #2a1a0a;
+      --accent-blue: #1c9bff;
+      --accent-green: #34c759;
+      --accent-orange: #ff9500;
+      --accent-red: #ff3b30;
+      --accent-purple: #af52de;
       --ink-color: #2c2c2c;
-      --pencil-gray: #666;
       --highlight-yellow: #fff3b0;
-      --tape-color: rgba(255, 250, 220, 0.7);
+      --icon-shadow: rgba(0,0,0,0.4);
     }
 
     body {
       font-family: 'Caveat', cursive;
-      background: 
-        radial-gradient(ellipse at top left, rgba(139, 105, 20, 0.3) 0%, transparent 50%),
-        radial-gradient(ellipse at bottom right, rgba(92, 64, 51, 0.4) 0%, transparent 50%),
-        linear-gradient(135deg, #3d2914 0%, #2a1a0a 50%, #1a0f05 100%);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px;
+      padding: 30px 20px;
+      background: 
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='leather'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' result='noise'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%233d2914' surfaceScale='2'%3E%3CfeDistantLight azimuth='45' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23leather)'/%3E%3C/svg%3E"),
+        linear-gradient(180deg, #1a0f05 0%, #0d0705 100%);
+      background-blend-mode: overlay;
     }
 
-    /* Leather Desk Surface */
+    /* Container */
     .desk {
       position: relative;
       width: 100%;
-      max-width: 900px;
+      max-width: 420px;
     }
 
-    /* Leather Texture Overlay */
-    .desk::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      left: -20px;
-      right: -20px;
-      bottom: -20px;
-      background: 
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
-      border-radius: 20px;
-      z-index: -1;
-    }
-
-    /* Header - Leather Label */
+    /* Header - iOS Style Badge */
     .header {
       text-align: center;
-      margin-bottom: 30px;
-      position: relative;
+      margin-bottom: 20px;
     }
 
     .header-label {
       display: inline-block;
-      background: linear-gradient(180deg, var(--leather-light) 0%, var(--leather-medium) 50%, var(--leather-dark) 100%);
-      color: #f5e6c8;
-      padding: 15px 40px;
-      font-size: 28px;
+      background: linear-gradient(180deg, #4a4a4a 0%, #2a2a2a 50%, #1a1a1a 100%);
+      color: #fff;
+      padding: 12px 28px;
+      font-size: 22px;
       font-weight: 600;
-      letter-spacing: 4px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 
-        0 4px 8px rgba(0,0,0,0.4),
-        inset 0 2px 4px rgba(255,255,255,0.2),
-        inset 0 -2px 4px rgba(0,0,0,0.3);
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        0 4px 12px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(255,255,255,0.2),
+        inset 0 -1px 0 rgba(0,0,0,0.3);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
       font-family: 'Marker Felt', cursive;
-      position: relative;
-    }
-
-    .header-label::before {
-      content: '';
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      right: 5px;
-      bottom: 5px;
-      border: 2px solid rgba(255,255,255,0.1);
-      border-radius: 6px;
+      border: 1px solid #333;
     }
 
     .tagline {
-      color: #a08060;
-      font-size: 16px;
-      margin-top: 15px;
+      color: #8b7355;
+      font-size: 14px;
+      margin-top: 10px;
       font-style: italic;
-      font-family: 'Caveat', cursive;
     }
 
-    /* Journal Container */
+    /* Notes Container - iOS Folder Style */
     .journal {
       position: relative;
-      background: linear-gradient(180deg, #8b7355 0%, #6b5344 100%);
-      border-radius: 12px;
-      padding: 8px;
+      background: linear-gradient(180deg, #3a3a3c 0%, #2c2c2e 100%);
+      border-radius: 14px;
+      padding: 12px;
       box-shadow: 
-        0 20px 60px rgba(0,0,0,0.5),
-        0 10px 20px rgba(0,0,0,0.3),
-        inset 0 2px 4px rgba(255,255,255,0.1);
-    }
-
-    /* Book Spine Effect */
-    .journal::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 30px;
-      background: linear-gradient(90deg, 
-        rgba(0,0,0,0.4) 0%, 
-        rgba(0,0,0,0.1) 30%,
-        transparent 100%);
-      border-radius: 12px 0 0 12px;
+        0 10px 40px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      border: 1px solid #1c1c1e;
     }
 
     /* Paper Stack */
     .paper-stack {
       position: relative;
       background: var(--paper-color);
-      border-radius: 8px;
-      min-height: 600px;
-      box-shadow: 
-        inset 0 0 20px rgba(0,0,0,0.05),
-        0 2px 4px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      min-height: 500px;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.08);
+      padding: 20px;
     }
 
     /* Paper Lines */
     .paper-stack::before {
       content: '';
       position: absolute;
-      top: 80px;
-      left: 60px;
-      right: 30px;
-      bottom: 40px;
+      top: 60px;
+      left: 50px;
+      right: 20px;
+      bottom: 30px;
       background: repeating-linear-gradient(
         transparent 0px,
-        transparent 31px,
-        var(--paper-lines) 31px,
-        var(--paper-lines) 32px
+        transparent 28px,
+        var(--paper-lines) 28px,
+        var(--paper-lines) 29px
       );
       pointer-events: none;
     }
@@ -165,21 +124,21 @@
     .paper-stack::after {
       content: '';
       position: absolute;
-      top: 80px;
-      left: 58px;
-      bottom: 40px;
+      top: 60px;
+      left: 48px;
+      bottom: 30px;
       width: 2px;
       background: #e8a0a0;
       pointer-events: none;
     }
 
-    /* Spiral Binding */
+    /* Spiral Binding - iOS Style Rings */
     .binding {
       position: absolute;
-      left: 20px;
-      top: 30px;
-      bottom: 30px;
-      width: 30px;
+      left: 8px;
+      top: 20px;
+      bottom: 20px;
+      width: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -187,229 +146,183 @@
     }
 
     .binding-hole {
-      width: 20px;
-      height: 20px;
-      background: linear-gradient(135deg, #888 0%, #666 50%, #444 100%);
+      width: 16px;
+      height: 16px;
+      background: linear-gradient(135deg, #5a5a5c 0%, #3a3a3c 50%, #2a2a2c 100%);
       border-radius: 50%;
       box-shadow: 
-        inset 2px 2px 4px rgba(255,255,255,0.3),
-        inset -2px -2px 4px rgba(0,0,0,0.5),
+        inset 1px 1px 2px rgba(255,255,255,0.2),
+        inset -1px -1px 2px rgba(0,0,0,0.4),
         0 2px 4px rgba(0,0,0,0.3);
+      border: 1px solid #1c1c1e;
     }
 
-    /* Tape Strip */
-    .tape {
-      position: absolute;
-      top: -15px;
-      right: 50px;
-      width: 120px;
-      height: 35px;
-      background: var(--tape-color);
-      transform: rotate(-3deg);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      z-index: 20;
+    /* Content Area */
+    .content {
+      position: relative;
+      z-index: 5;
+      padding: 10px 10px 10px 40px;
     }
 
-    .tape::before {
+    /* Entry Cards - iOS App Icon Style */
+    .entry {
+      background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 
+        0 4px 12px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      border: 1px solid rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Glossy Effect */
+    .entry::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: 
-        repeating-linear-gradient(
-          90deg,
-          transparent 0px,
-          transparent 10px,
-          rgba(0,0,0,0.03) 10px,
-          rgba(0,0,0,0.03) 11px
-        );
-    }
-
-    /* Content Area */
-    .content {
-      padding: 40px 40px 40px 80px;
-      position: relative;
-      z-index: 5;
-    }
-
-    /* Entry Cards */
-    .entry {
-      position: relative;
-      margin-bottom: 40px;
-      padding: 20px;
-      background: rgba(255,255,255,0.5);
-      border-radius: 4px;
-      box-shadow: 
-        2px 3px 8px rgba(0,0,0,0.1),
-        0 1px 2px rgba(0,0,0,0.05);
-      transform: rotate(-0.5deg);
-      transition: all 0.3s ease;
-    }
-
-    .entry:nth-child(even) {
-      transform: rotate(0.5deg);
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, transparent 100%);
+      border-radius: 12px 12px 0 0;
+      pointer-events: none;
     }
 
     .entry:hover {
-      transform: rotate(0deg) translateY(-5px);
+      transform: scale(1.02);
       box-shadow: 
-        4px 6px 15px rgba(0,0,0,0.15),
-        0 2px 4px rgba(0,0,0,0.1);
+        0 8px 20px rgba(0,0,0,0.25),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    .entry:active {
+      transform: scale(0.98);
+    }
+
+    /* Entry with Color Accent - Momentum */
+    .entry:first-child {
+      background: linear-gradient(180deg, #5ac8fa 0%, #007aff 100%);
+      color: #fff;
+    }
+
+    .entry:first-child .entry-date {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .entry:first-child .entry-text {
+      color: #fff;
+    }
+
+    .entry:first-child .highlight {
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .entry:first-child .click-hint {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Entry with Color Accent - Prosperity */
+    .entry:nth-child(2) {
+      background: linear-gradient(180deg, #ff9500 0%, #ff6b00 100%);
+      color: #fff;
+    }
+
+    .entry:nth-child(2) .entry-date {
+      color: rgba(255,255,255,0.8);
+    }
+
+    .entry:nth-child(2) .entry-text {
+      color: #fff;
+    }
+
+    .entry:nth-child(2) .highlight {
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .entry:nth-child(2) .click-hint {
+      color: rgba(255,255,255,0.7);
     }
 
     .entry-date {
       font-size: 14px;
-      color: var(--pencil-gray);
-      margin-bottom: 10px;
-      font-family: 'Caveat', cursive;
+      color: #8b8b8b;
+      margin-bottom: 6px;
+      font-family: 'Marker Felt', cursive;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .entry-text {
-      font-size: 22px;
-      line-height: 1.6;
+      font-size: 18px;
       color: var(--ink-color);
-      font-family: 'Caveat', cursive;
+      line-height: 1.5;
     }
 
-    /* Highlighter Effect */
     .highlight {
-      background: linear-gradient(180deg, transparent 50%, var(--highlight-yellow) 50%);
-      padding: 0 4px;
+      font-weight: 600;
+      color: #1c1c1e;
     }
 
-    /* Paper Clip */
-    .paper-clip {
-      position: absolute;
-      top: -10px;
-      left: 20px;
-      width: 30px;
-      height: 60px;
-      border: 3px solid #888;
-      border-radius: 15px 15px 0 0;
-      border-bottom: none;
-      transform: rotate(5deg);
-      z-index: 15;
+    .click-hint {
+      font-size: 12px;
+      color: #8b8b8b;
+      margin-top: 10px;
+      font-family: 'Marker Felt', cursive;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-    .paper-clip::before {
-      content: '';
-      position: absolute;
-      top: 15px;
-      left: 5px;
-      width: 14px;
-      height: 35px;
-      border: 3px solid #888;
-      border-radius: 10px 10px 0 0;
-      border-bottom: none;
-    }
-
-    /* Pencil Icon */
-    .pencil-icon {
-      position: absolute;
-      bottom: 30px;
-      right: 40px;
-      width: 100px;
-      height: 20px;
-      background: linear-gradient(90deg, 
-        #f4d03f 0%, 
-        #f4d03f 60%, 
-        #2c2c2c 60%, 
-        #2c2c2c 70%,
-        #e8b4b4 70%,
-        #e8b4b4 100%
-      );
-      border-radius: 2px;
-      transform: rotate(-15deg);
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-      z-index: 10;
-    }
-
-    .pencil-icon::before {
-      content: '';
-      position: absolute;
-      left: -15px;
-      top: 3px;
-      border: 7px solid transparent;
-      border-right: 15px solid #2c2c2c;
-    }
-
-    /* Footer */
-    .footer {
-      text-align: center;
-      margin-top: 30px;
-      color: #a08060;
-      font-size: 14px;
-      font-family: 'Caveat', cursive;
-    }
-
-    /* Clickable Entries */
-    .entry {
-      cursor: pointer;
-      position: relative;
-    }
-
+    /* Full Entry Modal - iOS Style */
     .entry-full {
-      display: none;
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.8);
-      z-index: 100;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
       padding: 20px;
     }
 
     .entry-full.active {
-      display: flex;
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .entry-full-content {
-      background: var(--paper-color);
-      max-width: 650px;
-      max-height: 85vh;
+      background: linear-gradient(180deg, #fef9e7 0%, #f5edd8 100%);
+      border-radius: 14px;
+      max-width: 500px;
       width: 100%;
-      padding: 40px;
-      border-radius: 8px;
-      position: relative;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      max-height: 80vh;
       overflow-y: auto;
-    }
-
-    .entry-full-content::before {
-      content: '';
-      position: absolute;
-      top: 60px;
-      left: 50px;
-      right: 30px;
-      bottom: 30px;
-      background: repeating-linear-gradient(
-        transparent 0px,
-        transparent 31px,
-        var(--paper-lines) 31px,
-        var(--paper-lines) 32px
-      );
-      pointer-events: none;
-    }
-
-    .entry-full-date {
-      font-size: 16px;
-      color: var(--pencil-gray);
-      margin-bottom: 20px;
-      font-family: 'Caveat', cursive;
-    }
-
-    .entry-full-text {
-      font-size: 26px;
-      line-height: 1.8;
-      color: var(--ink-color);
-      font-family: 'Caveat', cursive;
+      padding: 30px;
       position: relative;
-      z-index: 1;
+      box-shadow: 
+        0 20px 60px rgba(0,0,0,0.4),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+      border: 1px solid rgba(0,0,0,0.1);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .entry-full.active .entry-full-content {
+      transform: scale(1);
     }
 
     .entry-full-close {
@@ -417,58 +330,85 @@
       top: 15px;
       right: 20px;
       font-size: 28px;
-      color: var(--pencil-gray);
+      color: #8b8b8b;
       cursor: pointer;
-      font-family: sans-serif;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #f5f5f5 0%, #e5e5e5 100%);
+      border-radius: 50%;
+      box-shadow: 
+        0 2px 8px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      font-family: Arial, sans-serif;
       line-height: 1;
     }
 
     .entry-full-close:hover {
+      background: linear-gradient(180deg, #ff3b30 0%, #d63029 100%);
+      color: #fff;
+    }
+
+    .entry-full-date {
+      font-size: 14px;
+      color: #8b8b8b;
+      margin-bottom: 20px;
+      font-family: 'Marker Felt', cursive;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0d8c0;
+    }
+
+    .entry-full-text {
+      font-size: 18px;
       color: var(--ink-color);
+      line-height: 2;
     }
 
-    .click-hint {
+    .entry-full-text .highlight {
+      display: block;
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid #e0d8c0;
+      font-size: 16px;
+    }
+
+    /* Footer - iOS Style */
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      color: #6b6b6b;
       font-size: 12px;
-      color: var(--pencil-gray);
-      margin-top: 10px;
-      font-style: italic;
+      font-family: 'Marker Felt', cursive;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    /* Mobile */
-    @media (max-width: 768px) {
+    /* Responsive */
+    @media (max-width: 480px) {
+      .paper-stack {
+        min-height: 400px;
+        padding: 15px;
+      }
+      
       .content {
-        padding: 30px 20px 30px 50px;
+        padding-left: 30px;
       }
-
-      .paper-stack::before {
-        left: 40px;
-      }
-
-      .paper-stack::after {
-        left: 38px;
-      }
-
-      .binding {
-        left: 10px;
-      }
-
-      .binding-hole {
-        width: 14px;
-        height: 14px;
-      }
-
+      
       .entry-text {
-        font-size: 18px;
+        font-size: 16px;
       }
-
-      .header-label {
-        font-size: 20px;
-        padding: 12px 25px;
+      
+      .entry-full-content {
+        padding: 20px;
       }
-
-      .tape {
-        width: 80px;
-        right: 20px;
+      
+      .entry-full-text {
+        font-size: 16px;
       }
     }
   </style>
@@ -478,7 +418,7 @@
     <!-- Header -->
     <div class="header">
       <div class="header-label">BRO TO BRO</div>
-      <div class="tagline">real life. real lessons. no performance. no pretending.<br>just game from lived experience.</div>
+      <div class="tagline">raw thoughts. real experience. no fluff.</div>
     </div>
 
     <!-- Journal -->
@@ -491,18 +431,10 @@
         <div class="binding-hole"></div>
         <div class="binding-hole"></div>
         <div class="binding-hole"></div>
-        <div class="binding-hole"></div>
-        <div class="binding-hole"></div>
       </div>
 
       <!-- Paper Stack -->
       <div class="paper-stack">
-        <!-- Tape Strip -->
-        <div class="tape"></div>
-
-        <!-- Paper Clip -->
-        <div class="paper-clip"></div>
-
         <!-- Content -->
         <div class="content">
           <div class="entry" onclick="openEntry1()">
@@ -510,120 +442,117 @@
             <div class="entry-text">
               <span class="highlight">Word of the month: Momentum.</span> Momentum isn't built by loud moves. It's built by showing up daily and letting consistency do the talking...
             </div>
-            <div class="click-hint">Click to read full note →</div>
+            <div class="click-hint">Tap to read →</div>
           </div>
-          <div class="entry" onclick="openEntry2()" style="margin-top: 24px;">
+          <div class="entry" onclick="openEntry2()">
             <div class="entry-date">February 26, 2026</div>
             <div class="entry-text">
               <span class="highlight">Prosperity ain't about money.</span> Most men confuse prosperity with income. Cars. Watches. Square footage. That's not prosperity. That's measurement...
             </div>
-            <div class="click-hint">Click to read full note →</div>
+            <div class="click-hint">Tap to read →</div>
           </div>
         </div>
-
-        <!-- Full Entry Modal 1 - Momentum -->
-        <div class="entry-full" id="entryModal1" onclick="closeEntry(event)">
-          <div class="entry-full-content" onclick="event.stopPropagation()">
-            <span class="entry-full-close" onclick="closeEntry()">&times;</span>
-            <div class="entry-full-date">February 28, 2026</div>
-            <div class="entry-full-text" style="font-size: 20px; line-height: 2;">
-              <strong>word of the month: momentum</strong><br><br>
-              "momentum isn't built by loud moves ~<br>
-              it's built by showing up daily<br>
-              and letting consistency do the talking."<br><br>
-              keep this one close.<br><br>
-              momentum reminds you that you don't need to rush.<br>
-              you don't need to flex.<br>
-              you don't need to explain.<br><br>
-              just keep the wheel turning.<br>
-              even when nobody's clapping.<br><br>
-              every small action compounds.<br>
-              every quiet win stacks.<br><br>
-              the man who shows up when he doesn't feel like it<br>
-              becomes the man others can't keep up with.<br><br>
-              not because he's louder.<br>
-              not because he's flashier.<br>
-              but because he's still moving.<br><br>
-              momentum doesn't ask for an audience.<br>
-              it doesn't need validation.<br><br>
-              it's the quietest force in the room<br>
-              and the hardest to stop.<br><br>
-              you're not behind.<br>
-              you're building.<br><br>
-              you're not late.<br>
-              you're in motion.<br><br>
-              <span class="highlight">bro to bro — stay in motion.<br>
-              the rest catches up.</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Full Entry Modal 2 - Prosperity -->
-        <div class="entry-full" id="entryModal2" onclick="closeEntry(event)">
-          <div class="entry-full-content" onclick="event.stopPropagation()">
-            <span class="entry-full-close" onclick="closeEntry()">&times;</span>
-            <div class="entry-full-date">February 26, 2026</div>
-            <div class="entry-full-text" style="font-size: 20px; line-height: 2;">
-              <strong>prosperity ain't about money</strong><br><br>
-              most men confuse prosperity with income.<br>
-              cars. watches. square footage.<br>
-              being ahead of the next man.<br><br>
-              that's not prosperity. that's measurement.<br><br>
-              prosperity is internal before it ever becomes visible.<br><br>
-              if a man lacks integrity, generosity, and love,<br>
-              he can accumulate millions and still operate from scarcity.<br><br>
-              you've seen it.<br>
-              men chasing gold and land.<br>
-              fixated on competition.<br>
-              moving guarded.<br>
-              calling self-interest "drive."<br><br>
-              but unchecked self-interest becomes self-destruction.<br>
-              a greedy man can build wealth and still feel poor<br>
-              because someone else has more.<br><br>
-              that isn't poverty of money.<br>
-              that's poverty of spirit.<br><br>
-              real prosperity carries a different posture.<br><br>
-              it's the upright man.<br>
-              the open-handed man.<br>
-              the man who does right without needing applause.<br><br>
-              he isn't disturbed by competition.<br>
-              he isn't shaken by pressure.<br>
-              he doesn't abandon his code for speed.<br><br>
-              why? because he invested inward first.<br><br>
-              integrity is armor.<br>
-              generosity is leverage.<br>
-              love is strength, not softness.<br><br>
-              when you operate from that foundation,<br>
-              losses refine you.<br>
-              opposition sharpens you.<br>
-              delay disciplines you.<br><br>
-              the world will advise you to secure "number one" at all costs.<br>
-              to protect your position.<br>
-              to compete aggressively.<br><br>
-              but a life centered only on self will always feel cramped.<br>
-              expansion comes from contribution.<br><br>
-              let your soul expand.<br>
-              let your presence warm a room.<br>
-              move with generosity even when it's inconvenient.<br>
-              remain principled even when shortcuts are available.<br><br>
-              that is how you enter prosperity that endures.<br><br>
-              not loud prosperity.<br>
-              not temporary flashes.<br>
-              but the kind rooted in character.<br><br>
-              <span class="highlight">bro to bro — build the interior.<br>
-              the exterior will align.</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pencil -->
-        <div class="pencil-icon"></div>
       </div>
     </div>
 
     <!-- Footer -->
     <div class="footer">
-      short reads for men building something.<br>read it. think on it. move better.
+      short reads for men building something
+    </div>
+  </div>
+
+  <!-- Full Entry Modal 1 - Momentum -->
+  <div class="entry-full" id="entryModal1" onclick="closeEntry(event)">
+    <div class="entry-full-content" onclick="event.stopPropagation()">
+      <span class="entry-full-close" onclick="closeEntry()">&times;</span>
+      <div class="entry-full-date">February 28, 2026</div>
+      <div class="entry-full-text">
+        <strong>word of the month: momentum</strong><br><br>
+        "momentum isn't built by loud moves ~<br>
+        it's built by showing up daily<br>
+        and letting consistency do the talking."<br><br>
+        keep this one close.<br><br>
+        momentum reminds you that you don't need to rush.<br>
+        you don't need to flex.<br>
+        you don't need to explain.<br><br>
+        just keep the wheel turning.<br>
+        even when nobody's clapping.<br><br>
+        every small action compounds.<br>
+        every quiet win stacks.<br><br>
+        the man who shows up when he doesn't feel like it<br>
+        becomes the man others can't keep up with.<br><br>
+        not because he's louder.<br>
+        not because he's flashier.<br>
+        but because he's still moving.<br><br>
+        momentum doesn't ask for an audience.<br>
+        it doesn't need validation.<br><br>
+        it's the quietest force in the room<br>
+        and the hardest to stop.<br><br>
+        you're not behind.<br>
+        you're building.<br><br>
+        you're not late.<br>
+        you're in motion.<br><br>
+        <span class="highlight">bro to bro — stay in motion.<br>
+        the rest catches up.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Entry Modal 2 - Prosperity -->
+  <div class="entry-full" id="entryModal2" onclick="closeEntry(event)">
+    <div class="entry-full-content" onclick="event.stopPropagation()">
+      <span class="entry-full-close" onclick="closeEntry()">&times;</span>
+      <div class="entry-full-date">February 26, 2026</div>
+      <div class="entry-full-text">
+        <strong>prosperity ain't about money</strong><br><br>
+        most men confuse prosperity with income.<br>
+        cars. watches. square footage.<br>
+        being ahead of the next man.<br><br>
+        that's not prosperity. that's measurement.<br><br>
+        prosperity is internal before it ever becomes visible.<br><br>
+        if a man lacks integrity, generosity, and love,<br>
+        he can accumulate millions and still operate from scarcity.<br><br>
+        you've seen it.<br>
+        men chasing gold and land.<br>
+        fixated on competition.<br>
+        moving guarded.<br>
+        calling self-interest "drive."<br><br>
+        but unchecked self-interest becomes self-destruction.<br>
+        a greedy man can build wealth and still feel poor<br>
+        because someone else has more.<br><br>
+        that isn't poverty of money.<br>
+        that's poverty of spirit.<br><br>
+        real prosperity carries a different posture.<br><br>
+        it's the upright man.<br>
+        the open-handed man.<br>
+        the man who does right without needing applause.<br><br>
+        he isn't disturbed by competition.<br>
+        he isn't shaken by pressure.<br>
+        he doesn't abandon his code for speed.<br><br>
+        why? because he invested inward first.<br><br>
+        integrity is armor.<br>
+        generosity is leverage.<br>
+        love is strength, not softness.<br><br>
+        when you operate from that foundation,<br>
+        losses refine you.<br>
+        opposition sharpens you.<br>
+        delay disciplines you.<br><br>
+        the world will advise you to secure "number one" at all costs.<br>
+        to protect your position.<br>
+        to compete aggressively.<br><br>
+        but a life centered only on self will always feel cramped.<br>
+        expansion comes from contribution.<br><br>
+        let your soul expand.<br>
+        let your presence warm a room.<br>
+        move with generosity even when it's inconvenient.<br>
+        remain principled even when shortcuts are available.<br><br>
+        that is how you enter prosperity that endures.<br><br>
+        not loud prosperity.<br>
+        not temporary flashes.<br>
+        but the kind rooted in character.<br><br>
+        <span class="highlight">bro to bro — build the interior.<br>
+        the exterior will align.</span>
+      </div>
     </div>
   </div>
 
