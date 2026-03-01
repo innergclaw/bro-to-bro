@@ -505,7 +505,14 @@
 
         <!-- Content -->
         <div class="content">
-          <div class="entry" onclick="openEntry()">
+          <div class="entry" onclick="openEntry1()">
+            <div class="entry-date">February 28, 2026</div>
+            <div class="entry-text">
+              <span class="highlight">Word of the month: Momentum.</span> Momentum isn't built by loud moves. It's built by showing up daily and letting consistency do the talking...
+            </div>
+            <div class="click-hint">Click to read full note →</div>
+          </div>
+          <div class="entry" onclick="openEntry2()" style="margin-top: 24px;">
             <div class="entry-date">February 26, 2026</div>
             <div class="entry-text">
               <span class="highlight">Prosperity ain't about money.</span> Most men confuse prosperity with income. Cars. Watches. Square footage. That's not prosperity. That's measurement...
@@ -514,8 +521,45 @@
           </div>
         </div>
 
-        <!-- Full Entry Modal -->
-        <div class="entry-full" id="entryModal" onclick="closeEntry(event)">
+        <!-- Full Entry Modal 1 - Momentum -->
+        <div class="entry-full" id="entryModal1" onclick="closeEntry(event)">
+          <div class="entry-full-content" onclick="event.stopPropagation()">
+            <span class="entry-full-close" onclick="closeEntry()">&times;</span>
+            <div class="entry-full-date">February 28, 2026</div>
+            <div class="entry-full-text" style="font-size: 20px; line-height: 2;">
+              <strong>word of the month: momentum</strong><br><br>
+              "momentum isn't built by loud moves ~<br>
+              it's built by showing up daily<br>
+              and letting consistency do the talking."<br><br>
+              keep this one close.<br><br>
+              momentum reminds you that you don't need to rush.<br>
+              you don't need to flex.<br>
+              you don't need to explain.<br><br>
+              just keep the wheel turning.<br>
+              even when nobody's clapping.<br><br>
+              every small action compounds.<br>
+              every quiet win stacks.<br><br>
+              the man who shows up when he doesn't feel like it<br>
+              becomes the man others can't keep up with.<br><br>
+              not because he's louder.<br>
+              not because he's flashier.<br>
+              but because he's still moving.<br><br>
+              momentum doesn't ask for an audience.<br>
+              it doesn't need validation.<br><br>
+              it's the quietest force in the room<br>
+              and the hardest to stop.<br><br>
+              you're not behind.<br>
+              you're building.<br><br>
+              you're not late.<br>
+              you're in motion.<br><br>
+              <span class="highlight">bro to bro — stay in motion.<br>
+              the rest catches up.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Entry Modal 2 - Prosperity -->
+        <div class="entry-full" id="entryModal2" onclick="closeEntry(event)">
           <div class="entry-full-content" onclick="event.stopPropagation()">
             <span class="entry-full-close" onclick="closeEntry()">&times;</span>
             <div class="entry-full-date">February 26, 2026</div>
@@ -584,14 +628,20 @@
   </div>
 
   <script>
-    function openEntry() {
-      document.getElementById('entryModal').classList.add('active');
+    function openEntry1() {
+      document.getElementById('entryModal1').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function openEntry2() {
+      document.getElementById('entryModal2').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
     function closeEntry(event) {
-      if (!event || event.target === document.getElementById('entryModal')) {
-        document.getElementById('entryModal').classList.remove('active');
+      if (!event || event.target.classList.contains('entry-full')) {
+        document.getElementById('entryModal1').classList.remove('active');
+        document.getElementById('entryModal2').classList.remove('active');
         document.body.style.overflow = '';
       }
     }
